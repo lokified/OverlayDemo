@@ -30,14 +30,16 @@ class FullScreenNotificationView(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else
-                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.TYPE_PHONE,
+            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR,
             PixelFormat.TRANSLUCENT
         )
 
         val layoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         overlayView = layoutInflater.inflate(R.layout.full_screen_notification_layout, null)
+
         overlayView?.findViewById<ImageView>(R.id.btn_close)?.setOnClickListener {
             removeOverLay()
         }
